@@ -1,4 +1,4 @@
--- AfriConnect v2: Add avatar and setup wizard columns
+-- AfriTalent: Add avatar and setup wizard columns
 -- Run this in your Supabase SQL Editor
 
 -- Add new columns to profiles

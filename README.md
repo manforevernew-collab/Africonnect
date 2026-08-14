@@ -1,4 +1,4 @@
-# AfriConnect v2
+# AfriTalent
 
 Africa's premier verified professional network. KYC-verified talent, AI-matched opportunities, built for Africa.
 
@@ -61,7 +61,7 @@ vercel --prod
 ## 📁 Project Structure
 
 ```
-africonnect-v2/
+afritalent-v2/
 ├── src/
 │   ├── components/     # Navbar, Footer, ProtectedRoute, KYCGuard
 │   ├── context/        # AuthContext
@@ -94,8 +94,8 @@ africonnect-v2/
 
 | Account | Email | Password | Role |
 |---------|-------|----------|------|
-| Job Seeker | `jobseeker@africonnect.demo` | `DemoPass123!` | User |
-| Business | `business@africonnect.demo` | `DemoPass123!` | Admin |
+| Job Seeker | `jobseeker@afritalent.demo` | `DemoPass123!` | User |
+| Business | `business@afritalent.demo` | `DemoPass123!` | Admin |
 
 ## 🗄️ Supabase Setup
 

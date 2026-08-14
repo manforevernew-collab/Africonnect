@@ -3,14 +3,20 @@ import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.error('Missing Supabase credentials. Check your .env file.')
+const hasSupabaseConfig = Boolean(supabaseUrl && supabaseAnonKey)
+
+if (!hasSupabaseConfig) {
+  console.warn('Missing Supabase credentials. The app will run in demo mode without auth.')
 }
 
-export const supabase = createClient(supabaseUrl || '', supabaseAnonKey || '', {
-  auth: {
-    autoRefreshToken: true,
-    persistSession: true,
-    detectSessionInUrl: true
-  }
-})
+export const supabase = hasSupabaseConfig
+  ? createClient(supabaseUrl, supabaseAnonKey, {
+      auth: {
+        autoRefreshToken: true,
+        persistSession: true,
+        detectSessionInUrl: true
+      }
+    })
+  : null
+
+export const isSupabaseConfigured = hasSupabaseConfig

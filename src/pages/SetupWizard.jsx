@@ -178,13 +178,13 @@ export default function SetupWizard() {
                 setAvatarPreview(URL.createObjectURL(f))
               }
             }} style={{ padding: 8, maxWidth: 300, margin: '0 auto' }} />
-            <p style={{ fontSize: 13, color: 'var(--color-text-muted)', marginTop: 12 }}>A clear photo helps build trust on AfriConnect.</p>
+            <p style={{ fontSize: 13, color: 'var(--color-text-muted)', marginTop: 12 }}>A clear photo helps build trust on AfriTalent.</p>
           </div>
         )
       case 2:
         return (
           <div style={{ textAlign: 'center' }}>
-            <p style={{ color: 'var(--color-text-secondary)', fontSize: 15, marginBottom: 24 }}>How will you use AfriConnect?</p>
+            <p style={{ color: 'var(--color-text-secondary)', fontSize: 15, marginBottom: 24 }}>How will you use AfriTalent?</p>
             <div style={{ display: 'flex', gap: 16, justifyContent: 'center' }}>
               <button type="button" onClick={() => setUserType('job_seeker')} style={{
                 flex: 1, maxWidth: 220, padding: 24, borderRadius: 16, border: `2px solid ${userType === 'job_seeker' ? 'var(--color-accent)' : 'var(--color-border)'}`,
@@ -252,7 +252,7 @@ export default function SetupWizard() {
             <div style={{ fontSize: 64, marginBottom: 16 }}>🎉</div>
             <h2 style={{ fontSize: 22, fontWeight: 700, marginBottom: 8 }}>You are all set!</h2>
             <p style={{ color: 'var(--color-text-secondary)', fontSize: 14, lineHeight: 1.6, marginBottom: 24 }}>
-              Your profile is under review. While you wait, explore AfriConnect.
+              Your profile is under review. While you wait, explore AfriTalent.
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10, maxWidth: 320, margin: '0 auto' }}>
               {userType === 'job_seeker' && (
@@ -279,7 +279,7 @@ export default function SetupWizard() {
       )}
 
       <div className="container" style={{ maxWidth: 560, paddingTop: 40, paddingBottom: 60 }}>
-        <h1 style={{ fontSize: 24, fontWeight: 700, textAlign: 'center', marginBottom: 8 }}>Welcome to AfriConnect</h1>
+        <h1 style={{ fontSize: 24, fontWeight: 700, textAlign: 'center', marginBottom: 8 }}>Welcome to AfriTalent</h1>
         <p style={{ color: 'var(--color-text-secondary)', fontSize: 14, textAlign: 'center', marginBottom: 32 }}>Let's set up your account in {STEPS.length} simple steps.</p>
 
         {/* Progress Bar */}

@@ -1,4 +1,4 @@
--- AfriConnect v2: RLS Policy Fixes
+-- AfriTalent: RLS Policy Fixes
 -- Run this in your Supabase SQL Editor to fix permission errors
 
 -- Fix jobs table INSERT policy

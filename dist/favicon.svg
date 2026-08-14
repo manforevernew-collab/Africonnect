@@ -1,0 +1,20 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="64" height="64" rx="14" fill="#000000"/>
+  <circle cx="32" cy="32" r="26" stroke="#F5B000" stroke-width="2.5" fill="none"/>
+
+  <path d="M18 14C22 11 28 12 32 15C35 17 38 20 40 24C43 28 47 31 48 35C50 39 53 42 53 47C51 52 46 56 41 58C36 60 31 53 28 49C24 45 20 42 18 37C15 31 15 21 18 14Z" fill="#F5B000"/>
+
+  <g stroke="#F7F9FC" stroke-width="1.7" stroke-linecap="round" opacity="0.85">
+    <line x1="24" y1="19" x2="32" y2="22"/>
+    <line x1="24" y1="19" x2="30" y2="34"/>
+    <line x1="32" y1="22" x2="41" y2="29"/>
+    <line x1="30" y1="34" x2="41" y2="29"/>
+    <line x1="30" y1="34" x2="32" y2="44"/>
+  </g>
+
+  <circle cx="24" cy="19" r="2.6" fill="#1E6FEB" stroke="#F7F9FC" stroke-width="1.2"/>
+  <circle cx="32" cy="22" r="2.4" fill="#1E6FEB" stroke="#F7F9FC" stroke-width="1.2"/>
+  <circle cx="30" cy="34" r="2.3" fill="#1E6FEB" stroke="#F7F9FC" stroke-width="1.2"/>
+  <circle cx="41" cy="29" r="2.6" fill="#1E6FEB" stroke="#F7F9FC" stroke-width="1.2"/>
+  <circle cx="32" cy="44" r="2.4" fill="#1E6FEB" stroke="#F7F9FC" stroke-width="1.2"/>
+</svg>

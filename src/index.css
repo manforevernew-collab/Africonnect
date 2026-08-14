@@ -1,4 +1,4 @@
-/* AfriConnect v2 Design System */
+/* AfriTalent Design System */
 :root {
   --color-bg: #ffffff;
   --color-bg-muted: #f8f9fa;
@@ -7,8 +7,12 @@
   --color-text-secondary: #4a4a68;
   --color-text-muted: #8a8aa3;
   --color-border: #e8e8f0;
-  --color-primary: #1a1a2e;
-  --color-accent: #2563eb;
+  --color-primary: #f59e0b;
+  --color-primary-dark: #d97706;
+  --color-primary-darker: #b45309;
+  --color-accent: #f59e0b;
+  --color-navy: #0f172a;
+  --color-navy-light: #1e293b;
   --color-success: #16a34a;
   --color-warning: #f59e0b;
   --color-danger: #dc2626;
@@ -30,7 +34,7 @@ img { max-width: 100%; display: block; }
 .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 20px; border-radius: var(--radius-md); font-size: 14px; font-weight: 500; transition: all 0.15s ease; border: 1px solid transparent; }
 .btn-primary { background: var(--color-primary); color: white; }
-.btn-primary:hover { opacity: 0.9; }
+.btn-primary:hover { background: var(--color-primary-dark); }
 .btn-outline { border-color: var(--color-border); color: var(--color-text); background: white; }
 .btn-outline:hover { background: var(--color-bg-muted); }
 .btn-ghost { color: var(--color-text-secondary); }
@@ -45,11 +49,11 @@ img { max-width: 100%; display: block; }
 .card:hover { border-color: #d0d0e0; box-shadow: var(--shadow-md); }
 
 .input { width: 100%; padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid var(--color-border); background: white; color: var(--color-text); outline: none; transition: border-color 0.15s ease; }
-.input:focus { border-color: var(--color-text); }
+.input:focus { border-color: var(--color-primary); }
 textarea.input { resize: vertical; min-height: 80px; }
 
 .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 500; }
-.badge-blue { background: rgba(37, 99, 235, 0.08); color: var(--color-accent); }
+.badge-blue { background: rgba(245, 158, 11, 0.1); color: var(--color-primary-dark); }
 .badge-green { background: rgba(22, 163, 74, 0.08); color: var(--color-success); }
 .badge-gray { background: var(--color-bg-muted); color: var(--color-text-muted); }
 .badge-orange { background: rgba(245, 158, 11, 0.08); color: var(--color-warning); }
@@ -61,7 +65,7 @@ textarea.input { resize: vertical; min-height: 80px; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .spinner { width: 20px; height: 20px; border: 2px solid var(--color-border); border-top-color: var(--color-text); border-radius: 50%; animation: spin 0.6s linear infinite; }
 
-.toast { position: fixed; bottom: 24px; right: 24px; padding: 12px 20px; border-radius: var(--radius-md); background: var(--color-primary); color: white; font-size: 13px; font-weight: 500; box-shadow: var(--shadow-lg); z-index: 1000; animation: slideUp 0.3s ease; }
+.toast { position: fixed; bottom: 24px; right: 24px; padding: 12px 20px; border-radius: var(--radius-md); background: var(--color-text); color: white; font-size: 13px; font-weight: 500; box-shadow: var(--shadow-lg); z-index: 1000; animation: slideUp 0.3s ease; }
 @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
 .page-enter { animation: fadeIn 0.3s ease; }
@@ -77,6 +81,34 @@ textarea.input { resize: vertical; min-height: 80px; }
 .match-mid { background: rgba(245, 158, 11, 0.1); color: var(--color-warning); border: 2px solid var(--color-warning); }
 .match-low { background: rgba(138, 138, 163, 0.1); color: var(--color-text-muted); border: 2px solid var(--color-text-muted); }
 
+/* AfriTalent professional card */
+.pro-card { background: white; border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; transition: all 0.15s ease; display: block; }
+.pro-card:hover { border-color: #d0d0e0; box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.pro-cover { height: 64px; background: linear-gradient(135deg, #0f172a, #b45309); }
+.pro-body { padding: 0 20px 20px; text-align: center; }
+.pro-avatar { width: 64px; height: 64px; border-radius: 50%; background: #fef3c7; border: 3px solid white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 20px; color: var(--color-primary-dark); margin: -32px auto 0; position: relative; }
+
+/* AfriTalent job tags */
+.job-tag { display: inline-flex; align-items: center; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 500; background: rgba(245, 158, 11, 0.1); color: var(--color-primary-dark); }
+.job-tag-outline { background: transparent; border: 1px solid var(--color-border); color: var(--color-text-secondary); }
+
+/* AfriTalent company card */
+.company-card .card-rating { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 20px; background: rgba(245, 158, 11, 0.1); color: var(--color-warning); font-size: 13px; font-weight: 600; }
+
+/* AfriTalent review card */
+.review-stars { color: var(--color-warning); font-size: 13px; display: flex; gap: 2px; }
+.helpful-btn { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 20px; border: 1px solid var(--color-border); background: white; color: var(--color-text-secondary); font-size: 13px; font-weight: 500; transition: all 0.15s ease; }
+.helpful-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: rgba(5, 150, 105, 0.05); }
+
 @media (max-width: 768px) {
   .container { padding: 0 16px; }
+  .desktop-nav { display: none !important; }
+  .mobile-menu-btn { display: inline-flex !important; }
+  .mobile-menu { display: block !important; }
+  .mobile-nav-actions { display: flex !important; }
+
+  .mobile-menu::-webkit-scrollbar { width: 8px; }
+  .mobile-menu::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 8px; }
+  .mobile-menu::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 8px; }
+  .mobile-menu { scrollbar-width: thin; scrollbar-color: #cbd5e1 #f1f5f9; }
 }

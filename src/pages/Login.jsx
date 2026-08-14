@@ -43,7 +43,7 @@ export default function Login() {
       <div className="container" style={{ maxWidth: 420, paddingTop: 60, paddingBottom: 80 }}>
         <div style={{ textAlign: 'center', marginBottom: 32 }}>
           <h1 style={{ fontSize: 28, fontWeight: 700, marginBottom: 8 }}>{isSignUp ? 'Create Account' : 'Welcome Back'}</h1>
-          <p style={{ color: 'var(--color-text-secondary)', fontSize: 14 }}>{isSignUp ? "Join Africa's verified professional network" : 'Sign in to your AfriConnect account'}</p>
+          <p style={{ color: 'var(--color-text-secondary)', fontSize: 14 }}>{isSignUp ? "Join Africa's verified professional network" : 'Sign in to your AfriTalent account'}</p>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 24 }}>

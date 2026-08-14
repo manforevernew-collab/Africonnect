@@ -14,6 +14,11 @@ export default function ProfessionalDetail() {
   const [reviewRating, setReviewRating] = useState(5)
   const [reviewText, setReviewText] = useState('')
   const [submitting, setSubmitting] = useState(false)
+  const [showCompose, setShowCompose] = useState(false)
+  const [composeSubject, setComposeSubject] = useState('')
+  const [composeMessage, setComposeMessage] = useState('')
+  const [composeUrgency, setComposeUrgency] = useState('Normal')
+  const [showAttach, setShowAttach] = useState(false)
   const [toast, setToast] = useState(null)
 
   useEffect(() => { loadData() }, [id])
@@ -50,6 +55,28 @@ export default function ProfessionalDetail() {
       loadData()
     } catch (e) { setToast({ type: 'error', message: e.message }); setTimeout(() => setToast(null), 3000) }
     finally { setSubmitting(false) }
+  }
+
+  function sendMessage() {
+    if (!user) {
+      setToast({ type: 'error', message: 'Please sign in before sending a message.' });
+      setTimeout(() => setToast(null), 3000)
+      return
+    }
+
+    if (!composeSubject.trim() || !composeMessage.trim()) {
+      setToast({ type: 'error', message: 'Please add a subject and message before sending.' });
+      setTimeout(() => setToast(null), 3000)
+      return
+    }
+
+    setToast({ type: 'success', message: `Message drafted to ${pro.name}.` });
+    setTimeout(() => setToast(null), 3000)
+    setShowCompose(false)
+    setComposeSubject('')
+    setComposeMessage('')
+    setComposeUrgency('Normal')
+    setShowAttach(false)
   }
 
   if (loading) return <div className="container" style={{ padding: '80px 24px', textAlign: 'center' }}><div className="spinner" style={{ width: 32, height: 32, margin: '0 auto 16px' }} /><p style={{ color: 'var(--color-text-muted)' }}>Loading profile...</p></div>
@@ -128,12 +155,84 @@ export default function ProfessionalDetail() {
                 <div><div style={{ fontSize: 11, color: 'var(--color-text-muted)', marginBottom: 2 }}>RATING</div><div style={{ fontWeight: 500, fontSize: 14 }}>{pro.rating || 0} / 5.0</div></div>
                 <div><div style={{ fontSize: 11, color: 'var(--color-text-muted)', marginBottom: 2 }}>REVIEWS</div><div style={{ fontWeight: 500, fontSize: 14 }}>{pro.reviews_count || 0}</div></div>
               </div>
-              <button className="btn btn-primary" style={{ width: '100%', marginTop: 20 }}>Contact {pro.name?.split(' ')[0]}</button>
+              <button className="btn btn-primary" style={{ width: '100%', marginTop: 20 }} onClick={() => setShowCompose(true)}>
+                Contact {pro.name?.split(' ')[0]}
+              </button>
             </div>
           </div>
         </div>
         <style>{`@media (max-width: 768px) { .profile-grid { grid-template-columns: 1fr !important; } }`}</style>
       </div>
+
+      {showCompose && (
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(15, 23, 42, 0.55)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20, zIndex: 120 }}>
+          <div className="card" style={{ width: '100%', maxWidth: 720, padding: 24, borderRadius: 18 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18 }}>
+              <div>
+                <h3 style={{ fontSize: 24, fontWeight: 700, marginBottom: 4 }}>Compose message</h3>
+                <p style={{ fontSize: 13, color: 'var(--color-text-muted)', margin: 0 }}>Send a message to {pro.name}</p>
+              </div>
+              <button className="btn btn-ghost" onClick={() => setShowCompose(false)} style={{ padding: '8px 10px' }}>✕</button>
+            </div>
+
+            <div style={{ display: 'grid', gap: 16 }}>
+              <div>
+                <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--color-text-muted)', marginBottom: 6 }}>To</label>
+                <input className="input" value={pro.name} readOnly style={{ background: '#f8fafc' }} />
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 180px', gap: 12 }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--color-text-muted)', marginBottom: 6 }}>Subject</label>
+                  <input className="input" value={composeSubject} onChange={e => setComposeSubject(e.target.value)} placeholder="Say hello and introduce yourself" />
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--color-text-muted)', marginBottom: 6 }}>Priority</label>
+                  <select className="input" value={composeUrgency} onChange={e => setComposeUrgency(e.target.value)}>
+                    <option>Normal</option>
+                    <option>High</option>
+                    <option>Urgent</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--color-text-muted)', marginBottom: 6 }}>Message</label>
+                <textarea
+                  className="input"
+                  rows={7}
+                  value={composeMessage}
+                  onChange={e => setComposeMessage(e.target.value)}
+                  placeholder="Hi, I’d love to connect about your work and explore opportunities."
+                  style={{ resize: 'vertical' }}
+                />
+              </div>
+
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+                <button className="btn btn-outline" type="button" onClick={() => setShowAttach(!showAttach)}>{showAttach ? 'Hide attachment options' : 'Add attachment'}</button>
+                <div style={{ display: 'flex', gap: 10, marginLeft: 'auto' }}>
+                  <button className="btn btn-ghost" onClick={() => setShowCompose(false)}>Cancel</button>
+                  <button className="btn btn-primary" onClick={sendMessage}>Send message</button>
+                </div>
+              </div>
+
+              {showAttach && (
+                <div style={{ padding: 12, background: '#f8fafc', border: '1px solid var(--color-border)', borderRadius: 12 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+                    <strong style={{ fontSize: 13 }}>Attachments</strong>
+                    <span style={{ color: 'var(--color-text-muted)', fontSize: 12 }}>Optional</span>
+                  </div>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                    {['Resume.pdf', 'Portfolio.pdf', 'Intro deck.pdf'].map(file => (
+                      <span key={file} className="badge badge-gray" style={{ padding: '6px 10px' }}>{file}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

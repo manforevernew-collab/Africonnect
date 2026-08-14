@@ -11,11 +11,16 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    if (!supabase) {
+      setLoading(false)
+      return
+    }
+
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null)
       if (session?.user) fetchProfile(session.user.id)
       else setLoading(false)
-    })
+    }).catch(() => setLoading(false))
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null)
@@ -27,26 +32,45 @@ export function AuthProvider({ children }) {
   }, [])
 
   async function fetchProfile(userId) {
-    const { data } = await supabase
-      .from('profiles')
-      .select('*')
-      .eq('id', userId)
-      .single()
-    setProfile(data)
-    setLoading(false)
+    if (!supabase) {
+      setLoading(false)
+      return
+    }
 
-    // Redirect to setup wizard if not complete
-    if (data && !data.setup_complete && data.kyc_status === 'unverified') {
-      navigate('/setup')
+    try {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', userId)
+        .single()
+
+      if (error) {
+        setProfile(null)
+        setLoading(false)
+        return
+      }
+
+      setProfile(data)
+      setLoading(false)
+
+      if (data && !data.setup_complete && data.kyc_status === 'unverified') {
+        navigate('/setup')
+      }
+    } catch (error) {
+      console.error('Profile fetch failed:', error)
+      setProfile(null)
+      setLoading(false)
     }
   }
 
   const signInWithEmail = async (email, password) => {
+    if (!supabase) return { data: null, error: new Error('Supabase is not configured.') }
     const { data, error } = await supabase.auth.signInWithPassword({ email, password })
     return { data, error }
   }
 
   const signUpWithEmail = async (email, password, metadata) => {
+    if (!supabase) return { data: null, error: new Error('Supabase is not configured.') }
     const { data, error } = await supabase.auth.signUp({
       email, password,
       options: { data: metadata }
@@ -55,6 +79,7 @@ export function AuthProvider({ children }) {
   }
 
   const signInWithOAuth = async (provider) => {
+    if (!supabase) return { data: null, error: new Error('Supabase is not configured.') }
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider,
       options: { redirectTo: window.location.origin }
@@ -63,6 +88,12 @@ export function AuthProvider({ children }) {
   }
 
   const signOut = async () => {
+    if (!supabase) {
+      setUser(null)
+      setProfile(null)
+      return
+    }
+
     await supabase.auth.signOut()
     setUser(null)
     setProfile(null)
